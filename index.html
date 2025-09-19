@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Envelope</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 300px;
+      height: 200px;
+    }
+
+    /* Envelope Base */
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #ff4d6d;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Envelope Lid */
+    .lid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e63956;
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top;
+      transition: transform 1s ease-in-out;
+      z-index: 3;
+    }
+
+    .envelope.open .lid {
+      transform: rotateX(180deg);
+    }
+
+    /* Letter (Photo inside) */
+    .letter {
+      position: absolute;
+      top: 100%;
+      left: 10px;
+      right: 10px;
+      height: 160px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: top 1s ease-in-out;
+      z-index: 2;
+    }
+
+    .envelope.open .letter {
+      top: 20px;
+    }
+
+    .letter img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+    }
+
+    /* Buttons */
+    .buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e63956;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="envelope" id="envelope">
+      <div class="lid"></div>
+      <div class="letter">
+        <img src="your-photo.jpg" alt="Valentine Photo">
+      </div>
+    </div>
+    <div class="buttons">
+      <button id="openBtn">Open</button>
+      <button id="closeBtn" style="display:none;">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const envelope = document.getElementById('envelope');
+
+    openBtn.addEventListener('click', () => {
+      envelope.classList.add('open');
+      openBtn.style.display = 'none';
+      closeBtn.style.display = 'inline-block';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      envelope.classList.remove('open');
+      closeBtn.style.display = 'none';
+      openBtn.style.display = 'inline-block';
+    });
+  </script>
+
+</body>
+
+</html>
